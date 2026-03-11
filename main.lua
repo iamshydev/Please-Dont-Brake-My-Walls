@@ -1,14 +1,13 @@
 local sti = require "libs.sti"
+require "src.EnemyManager"
+
 local DEBUG = false
 
 function love.load()
     Map = sti("assets/tilemaps/plains.lua")
 
-    Path = {}
+    local path = {}
     Spawn = {}
-
-    Enemies = {}
-    Towers = {}
 
     Health = 100
 
@@ -16,46 +15,24 @@ function love.load()
         if layer.name == "EnemyPath" then
             local obj = layer.objects[1]
             Spawn = { x = layer.objects[2].x, y = layer.objects[2].y }
-            
+
             for _, point in ipairs(obj.polyline) do
-                table.insert(Path, { x = point.x, y = point.y })
+                table.insert(path, { x = point.x, y = point.y })
             end
         end
     end
+
+    EnemyManager = EnemyManager(path)
+    Towers = {}
 end
 
 function love.update(dt)
-    for i = #Enemies, 1, -1 do
-        local enemy = Enemies[i]
-
-        if enemy.health <= 0 then
-            table.remove(Enemies, i)
-
-        else
-            local targetPoint = Path[enemy.target]
-
-            if targetPoint then
-                local dx = targetPoint.x - enemy.x
-                local dy = targetPoint.y - enemy.y
-                local dist = math.sqrt(dx*dx + dy*dy)
-
-                if dist < 2 then
-                    enemy.target = enemy.target + 1
-                else
-                    enemy.x = enemy.x + dx / dist * enemy.speed * dt
-                    enemy.y = enemy.y + dy / dist * enemy.speed * dt
-                end
-            else
-                Health = Health - enemy.damage
-                table.remove(Enemies, i)
-            end
-        end
-    end
+    EnemyManager:update(dt)
 
     for _, tower in ipairs(Towers) do
         tower.cooldown = tower.cooldown - dt
         if tower.cooldown <= 0 then
-            for _, enemy in ipairs(Enemies) do
+            for _, enemy in ipairs(EnemyManager.enemies) do
                 local dx = enemy.x - tower.x
                 local dy = enemy.y - tower.y
                 local dist = math.sqrt(dx*dx + dy*dy)
@@ -82,16 +59,7 @@ function love.draw()
         end
     end
 
-    for _, enemy in ipairs(Enemies) do
-        love.graphics.setColor(1, 0, 0)
-        love.graphics.rectangle("fill", enemy.x - enemy.width/2, enemy.y - enemy.height/2, enemy.width, enemy.height)
-
-        local hpPercent = enemy.health / enemy.maxHealth
-
-        love.graphics.setColor(0,1,0)
-        love.graphics.rectangle("fill", enemy.x - 10, enemy.y - 12, 20 * hpPercent, 3)
-        love.graphics.setColor(1,1,1)
-    end
+    EnemyManager:draw()
 
     for _, tower in ipairs(Towers) do
         love.graphics.setColor(1,1,0)
@@ -128,18 +96,7 @@ end
 
 function love.keypressed(key)
     if key == "return" then
-        local enemy = {
-            x = Spawn.x,
-            y = Spawn.y,
-            target = 2,
-            maxHealth = 20,
-            health = 20,
-            speed = 100,
-            damage = 2,
-            width = 8,
-            height = 8
-        }
-        table.insert(Enemies, enemy)
+        EnemyManager:spawnEnemy(Spawn.x, Spawn.y)
     end
 
     if key == "f3" then
