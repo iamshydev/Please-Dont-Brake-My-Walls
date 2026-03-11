@@ -1,5 +1,5 @@
 local sti = require "libs.sti"
-local DEBUG = true
+local DEBUG = false
 
 function love.load()
     Map = sti("assets/tilemaps/plains.lua")
@@ -140,6 +140,10 @@ function love.keypressed(key)
             height = 8
         }
         table.insert(Enemies, enemy)
+    end
+
+    if key == "f3" then
+        DEBUG = not DEBUG
     end
 end
 
