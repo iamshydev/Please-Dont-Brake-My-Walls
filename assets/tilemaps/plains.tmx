@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="2">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="3">
+ <editorsettings>
+  <export target="plains.lua" format="lua"/>
+ </editorsettings>
  <tileset firstgid="1" name="plains" tilewidth="16" tileheight="16" tilecount="3" columns="3">
   <image source="../tilesets/plains.png" width="48" height="16"/>
  </tileset>
@@ -54,6 +57,9 @@
  <objectgroup id="3" name="EnemyPath">
   <object id="1" x="0" y="168">
    <polyline points="0,0 249.333,0.337847 249.208,-79.8971 391.992,-80.2344 392.133,80.1484 480,79.9934"/>
+  </object>
+  <object id="2" name="Spawn" x="0" y="168">
+   <point/>
   </object>
  </objectgroup>
 </map>
