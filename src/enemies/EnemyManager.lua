@@ -1,4 +1,4 @@
-require "src.Enemy"
+require "src.enemies.Enemy"
 
 EnemyManager = {}
 EnemyManager.__index = EnemyManager

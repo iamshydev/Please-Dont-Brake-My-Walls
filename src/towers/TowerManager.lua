@@ -1,4 +1,4 @@
-require "src.Tower"
+require "src.towers.Tower"
 
 TowerManager = {}
 TowerManager.__index = TowerManager

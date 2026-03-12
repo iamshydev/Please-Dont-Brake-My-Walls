@@ -1,6 +1,6 @@
 local sti = require "libs.sti"
-require "src.EnemyManager"
-require "src.TowerManager"
+require "src.enemies.EnemyManager"
+require "src.towers.TowerManager"
 
 DEBUG = false
 
@@ -51,7 +51,7 @@ function love.draw()
 end
 
 
-function love.mousepressed(x, y, button, istouch)
+function love.mousepressed(x, y, button)
     if button == 1 then
         TowerManager:spawnTower(x, y)
     end
