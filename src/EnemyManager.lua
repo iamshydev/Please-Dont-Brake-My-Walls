@@ -4,7 +4,7 @@ EnemyManager = {}
 EnemyManager.__index = EnemyManager
 
 function EnemyManager:new(path)
-    self = setmetatable({
+    local self = setmetatable({
         enemies = {},
         path = path
     }, EnemyManager)

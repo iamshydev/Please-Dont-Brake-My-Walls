@@ -2,7 +2,7 @@ Enemy = {}
 Enemy.__index = Enemy
 
 function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height)
-    self = setmetatable({
+    local self = setmetatable({
         x = x,
         y = y,
         target = target,
