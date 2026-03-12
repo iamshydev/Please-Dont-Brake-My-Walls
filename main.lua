@@ -22,7 +22,7 @@ function love.load()
         end
     end
 
-    Player = Player(100)
+    Player = Player(100, 100)
     EnemyManager = EnemyManager(path)
     TowerManager = TowerManager()
 end
@@ -47,7 +47,7 @@ function love.draw()
     EnemyManager:draw()
     TowerManager:draw()
 
-    love.graphics.print(("Health: %d"):format(Player.health), 300, 20)
+    love.graphics.print(("Health: %d/%d"):format(Player.health, Player.maxHealth), 300, 20)
 end
 
 
