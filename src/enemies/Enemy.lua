@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height)
+function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height, goldDrop)
     local self = setmetatable({
         x = x,
         y = y,
@@ -11,7 +11,8 @@ function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height
         speed = speed,
         damage = damage,
         width = width,
-        height = height
+        height = height,
+        goldDrop = goldDrop
     }, Enemy)
 
     return self

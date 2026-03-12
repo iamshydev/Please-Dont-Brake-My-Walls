@@ -16,8 +16,11 @@ setmetatable(TowerManager, {
 })
 
 function TowerManager:spawnTower(x, y)
-    local tower = Tower(x, y, 10, 36, 1, 0, 10, 10)
-    table.insert(TowerManager.towers, tower)
+    local cost = 50
+    if Player:spendGold(cost) then
+        local tower = Tower(x, y, 10, 36, 1, 0, 10, 10, 50)
+        table.insert(self.towers, tower)
+    end
 end
 
 function TowerManager:update(dt)

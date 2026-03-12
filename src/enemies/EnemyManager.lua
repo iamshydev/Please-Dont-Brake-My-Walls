@@ -17,7 +17,7 @@ setmetatable(EnemyManager, {
 })
 
 function EnemyManager:spawnEnemy(x, y)
-    local enemy = Enemy(x, y, 2, 20, 20, 100, 2, 8, 8)
+    local enemy = Enemy(x, y, 2, 20, 20, 100, 2, 8, 8, 10)
     table.insert(self.enemies, enemy)
 end
 
@@ -25,6 +25,9 @@ function EnemyManager:update(dt)
     for i = #self.enemies, 1, -1 do
         local alive = self.enemies[i]:update(dt, self.path)
         if not alive then
+            if self.enemies[i].health <= 0 then
+                Player:earnGold(self.enemies[i].goldDrop)
+            end
             table.remove(self.enemies, i)
         end
     end

@@ -1,7 +1,7 @@
 Tower = {}
 Tower.__index = Tower
 
-function Tower:new(x, y, damage, range, fireRate, cooldown, width, height)
+function Tower:new(x, y, damage, range, fireRate, cooldown, width, height, cost)
     local self = setmetatable({
         x = x,
         y = y,
@@ -10,7 +10,8 @@ function Tower:new(x, y, damage, range, fireRate, cooldown, width, height)
         fireRate = fireRate,
         cooldown = cooldown,
         width = width,
-        height = height
+        height = height,
+        cost = cost
     }, Tower)
 
     return self
@@ -41,8 +42,8 @@ function Tower:draw()
     love.graphics.setColor(1,1,0)
     love.graphics.rectangle("fill", self.x - self.width/2, self.y - self.height/2, self.width, self.height)
 
-    if DEBUG then
-        love.graphics.setColor(1,1,0,0.25)
+    if Game.debug then
+        love.graphics.setColor(1,1,0)
         love.graphics.circle("line", self.x, self.y, self.range)
     end
 

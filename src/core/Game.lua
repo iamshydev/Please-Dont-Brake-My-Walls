@@ -10,7 +10,7 @@ function Game:new()
     local self = setmetatable({
         debug = false
     }, Game)
-    
+
     return self
 end
 
@@ -35,7 +35,7 @@ function Game:load()
         end
     end
 
-    Player = Player(100, 100)
+    Player = Player(100, 100, 100)
     EnemyManager = EnemyManager(path)
     TowerManager = TowerManager()
 end
@@ -80,4 +80,5 @@ function Game:draw()
     TowerManager:draw()
 
     love.graphics.print(("Health: %d/%d"):format(Player.health, Player.maxHealth), 300, 20)
+    love.graphics.print(("Gold: %d"):format(Player.gold), 300, 40)
 end
