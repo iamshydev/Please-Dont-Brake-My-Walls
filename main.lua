@@ -1,6 +1,7 @@
 local sti = require "libs.sti"
 require "src.enemies.EnemyManager"
 require "src.towers.TowerManager"
+require "src.players.Player"
 
 DEBUG = false
 
@@ -9,8 +10,6 @@ function love.load()
 
     local path = {}
     Spawn = {}
-
-    Health = 100
 
     for _, layer in ipairs(Map.layers) do
         if layer.name == "EnemyPath" then
@@ -23,6 +22,7 @@ function love.load()
         end
     end
 
+    Player = Player(100)
     EnemyManager = EnemyManager(path)
     TowerManager = TowerManager()
 end
@@ -47,7 +47,7 @@ function love.draw()
     EnemyManager:draw()
     TowerManager:draw()
 
-    love.graphics.print(("Health: %d"):format(Health), 300, 20)
+    love.graphics.print(("Health: %d"):format(Player.health), 300, 20)
 end
 
 

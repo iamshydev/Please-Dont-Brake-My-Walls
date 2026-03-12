@@ -39,7 +39,7 @@ function Enemy:update(dt, path)
             self.y = self.y + dy / dist * self.speed * dt
         end
     else
-        Health = Health - self.damage
+        Player:takeDamage(self.damage)
         return false
     end
 
