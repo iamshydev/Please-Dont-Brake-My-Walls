@@ -1,4 +1,5 @@
 local sti = require "libs.sti"
+require "src.waves.WaveManager"
 require "src.enemies.EnemyManager"
 require "src.towers.TowerManager"
 require "src.players.Player"
@@ -35,6 +36,9 @@ function Game:load()
         end
     end
 
+    local waveData = require "src.maps.plains.waves"
+
+    WaveManager = WaveManager(waveData, Spawn)
     Player = Player(100, 100, 100)
     EnemyManager = EnemyManager(path)
     TowerManager = TowerManager()
@@ -45,6 +49,7 @@ function Game:toggleDebug()
 end
 
 function Game:update(dt)
+    WaveManager:update(dt)
     EnemyManager:update(dt)
     TowerManager:update(dt)
 end
@@ -79,6 +84,7 @@ function Game:draw()
     EnemyManager:draw()
     TowerManager:draw()
 
+    love.graphics.print(WaveManager:getStatusText(), 300, 60)
     love.graphics.print(("Health: %d/%d"):format(Player.health, Player.maxHealth), 300, 20)
     love.graphics.print(("Gold: %d"):format(Player.gold), 300, 40)
 end

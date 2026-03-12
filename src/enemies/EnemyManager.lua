@@ -1,3 +1,4 @@
+local EnemyTypes = require "src.enemies.EnemyTypes"
 require "src.enemies.Enemy"
 
 EnemyManager = {}
@@ -16,8 +17,9 @@ setmetatable(EnemyManager, {
     __call = EnemyManager.new
 })
 
-function EnemyManager:spawnEnemy(x, y)
-    local enemy = Enemy(x, y, 2, 20, 20, 100, 2, 8, 8, 10)
+function EnemyManager:spawnEnemy(x, y, enemyType)
+    local def = EnemyTypes[enemyType or "basic"]
+    local enemy = Enemy(x, y, 1, def.maxHealth, def.maxHealth, def.speed, def.damage, def.width, def.height, def.gold)
     table.insert(self.enemies, enemy)
 end
 
@@ -26,7 +28,7 @@ function EnemyManager:update(dt)
         local alive = self.enemies[i]:update(dt, self.path)
         if not alive then
             if self.enemies[i].health <= 0 then
-                Player:earnGold(self.enemies[i].goldDrop)
+                Player:earnGold(self.enemies[i].gold)
             end
             table.remove(self.enemies, i)
         end
