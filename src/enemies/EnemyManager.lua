@@ -5,7 +5,7 @@ EnemyManager = {}
 EnemyManager.__index = EnemyManager
 
 function EnemyManager:new(path)
-    local self = setmetatable({
+    self = setmetatable({
         enemies = {},
         path = path
     }, EnemyManager)
@@ -19,7 +19,7 @@ setmetatable(EnemyManager, {
 
 function EnemyManager:spawnEnemy(x, y, enemyType)
     local def = EnemyTypes[enemyType or "basic"]
-    local enemy = Enemy(x, y, 1, def.maxHealth, def.maxHealth, def.speed, def.damage, def.width, def.height, def.gold)
+    local enemy = Enemy(x, y, 1, def.maxHealth, def.maxHealth, def.speed, def.damage, def.width, def.height, def.gold, def.color)
     table.insert(self.enemies, enemy)
 end
 

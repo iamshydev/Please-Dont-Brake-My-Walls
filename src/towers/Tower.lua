@@ -2,7 +2,7 @@ Tower = {}
 Tower.__index = Tower
 
 function Tower:new(x, y, damage, range, fireRate, cooldown, width, height, cost)
-    local self = setmetatable({
+    self = setmetatable({
         x = x,
         y = y,
         damage = damage,

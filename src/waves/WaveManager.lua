@@ -2,7 +2,7 @@ WaveManager = {}
 WaveManager.__index = WaveManager
 
 function WaveManager:new(waveData, spawn)
-    local self = setmetatable({
+    self = setmetatable({
         waves = waveData,
         spawn = spawn,
         currentWave = 0,

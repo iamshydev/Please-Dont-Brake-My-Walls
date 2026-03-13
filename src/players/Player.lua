@@ -2,7 +2,7 @@ Player = {}
 Player.__index = Player
 
 function Player:new(maxHealth, health, gold)
-    local self = setmetatable({
+    self = setmetatable({
         maxHealth = maxHealth,
         health = health,
         gold = gold

@@ -5,7 +5,8 @@ return {
         damage = 2,
         width = 8,
         height = 8,
-        gold = 10
+        gold = 5,
+        color = {1,0,0}
     },
     fast = {
         maxHealth = 10,
@@ -13,7 +14,8 @@ return {
         damage = 1,
         width = 8,
         height = 8,
-        gold = 15
+        gold = 10,
+        color = {0,1,0}
     },
     tank = {
         maxHealth = 80,
@@ -21,6 +23,7 @@ return {
         damage = 5,
         width = 8,
         height = 8,
-        gold = 20
+        gold = 15,
+        color = {0,0,1}
     }
 }

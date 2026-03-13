@@ -4,7 +4,7 @@ TowerManager = {}
 TowerManager.__index = TowerManager
 
 function TowerManager:new()
-    local self = setmetatable({
+    self = setmetatable({
         towers = {}
     }, TowerManager)
 

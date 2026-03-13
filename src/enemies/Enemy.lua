@@ -1,8 +1,8 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height, gold)
-    local self = setmetatable({
+function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height, gold, color)
+    self = setmetatable({
         x = x,
         y = y,
         target = target,
@@ -12,7 +12,8 @@ function Enemy:new(x, y, target, maxHealth, health, speed, damage, width, height
         damage = damage,
         width = width,
         height = height,
-        gold = gold
+        gold = gold,
+        color = color
     }, Enemy)
 
     return self
@@ -48,7 +49,7 @@ function Enemy:update(dt, path)
 end
 
 function Enemy:draw()
-    love.graphics.setColor(1, 0, 0)
+    love.graphics.setColor(self.color)
     love.graphics.rectangle("fill", self.x - self.width/2, self.y - self.height/2, self.width, self.height)
 
     local hpPercent = self.health / self.maxHealth
